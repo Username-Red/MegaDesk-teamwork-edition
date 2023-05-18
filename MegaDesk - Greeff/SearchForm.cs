@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -84,7 +85,28 @@ namespace MegaDesk___Greeff {
             }
 
             private void searchButton_Click(object sender, EventArgs e) {
-                infoBox.Text = File.ReadAllText("deskQuote.txt");
+                string json = File.ReadAllText("deskQuote.txt");
+                var deskQuotes = JsonConvert.DeserializeObject<List<DeskQuote>>(json);
+                if (deskQuotes == null)
+                    deskQuotes = new List<DeskQuote>();
+
+                var filteredQuotes = new List<DeskQuote>();
+                foreach (DeskQuote deskQuote in deskQuotes) {
+                    if (deskQuote._desk._material == materialBox.Text)
+                        filteredQuotes.Add(deskQuote);
+                }
+
+                infoBox.Text = "";
+                foreach (DeskQuote deskQuote in filteredQuotes) {
+                    infoBox.Text += "Customer Name: " + deskQuote._customerName +
+                        "\n" + "Width: " + deskQuote._desk._width.ToString() + " in." +
+                        "\n" + "Depth: " + deskQuote._desk._depth.ToString() + " in." +
+                        "\n" + "Drawers: " + deskQuote._desk._drawerCount.ToString() +
+                        "\n" + "Material: " + deskQuote._desk._material +
+                        "\n" + "Rush Days: " + deskQuote._rushDays.ToString() +
+                        "\n" + "Total: " + String.Format("{0, 0:C2}", deskQuote.CalculateTotal()) +
+                        "\n\n";
+                }
             }
         }
     }

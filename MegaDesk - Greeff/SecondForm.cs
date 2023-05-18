@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -117,6 +118,14 @@ namespace MegaDesk___Greeff
             DeskQuote quote = new DeskQuote(desk, rushDays, name, date);
             double total = quote.CalculateTotal();
 
+            string json = File.ReadAllText("deskQuote.txt");
+            var deskQuotes = JsonConvert.DeserializeObject<List<DeskQuote>>(json);
+            if (deskQuotes == null)
+                deskQuotes = new List<DeskQuote>();
+            deskQuotes.Add(quote);
+            File.WriteAllText("deskQuote.txt", JsonConvert.SerializeObject(deskQuotes));
+
+            /*
             string info = $"Width: {width1}" +
                 $"\nDepth: {depth1}" +
                 $"\nNumber of Drawers: {drawerCount}" +
@@ -129,6 +138,7 @@ namespace MegaDesk___Greeff
             string file = "deskQuote.txt";
 
             File.WriteAllText(file, info);
+            */
 
             ThirdForm viewThirdForm = new ThirdForm();
 

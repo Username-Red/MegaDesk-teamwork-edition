@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -93,14 +95,26 @@ namespace MegaDesk___Greeff
 
         private void loadButton_Click(object sender, EventArgs e)
         {
-            string file = "deskQuote.txt";
+            string json = File.ReadAllText("deskQuote.txt");
+            var deskQuotes = JsonConvert.DeserializeObject<List<DeskQuote>>(json);
+            if (deskQuotes == null)
+                deskQuotes = new List<DeskQuote>();
             
-
+            foreach (DeskQuote deskQuote in deskQuotes) {
+                infoBox.Text += "Customer Name: " + deskQuote._customerName +
+                    "\n" + "Width: " + deskQuote._desk._width.ToString() + " in." +
+                    "\n" + "Depth: " + deskQuote._desk._depth.ToString() + " in." +
+                    "\n" + "Drawers: " + deskQuote._desk._drawerCount.ToString() +
+                    "\n" + "Material: " + deskQuote._desk._material +
+                    "\n" + "Rush Days: " + deskQuote._rushDays.ToString() +
+                    "\n" + "Total: " + String.Format("{0, 0:C2}", deskQuote.CalculateTotal()) +
+                    "\n\n";
+            }
+            /*
+            string file = "deskQuote.txt";
             string str = File.ReadAllText(file);
             infoBox.Text = str;
-
-
-
+            */
         }
 
         private void infoBox_Click(object sender, EventArgs e)

@@ -9,10 +9,10 @@ namespace MegaDesk___Greeff
     internal class DeskQuote
     {
         //Attributes
-        Desk _desk;
-        int _rushDays;
-        string _customerName;
-        DateTime _quoteDate;
+        public Desk _desk;
+        public int _rushDays;
+        public string _customerName;
+        public DateTime _quoteDate;
 
         // Constructors
         public DeskQuote(Desk desk, int rushDays, string customerName, DateTime quoteDate) {
