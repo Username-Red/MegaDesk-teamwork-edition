@@ -164,12 +164,12 @@
             // materialBox
             // 
             materialBox.FormattingEnabled = true;
-            materialBox.Items.AddRange(new object[] { "Pine", "Vaneer", "Rosewood", "Oak", "Laminate" });
             materialBox.Location = new Point(404, 179);
             materialBox.Name = "materialBox";
             materialBox.Size = new Size(89, 23);
             materialBox.TabIndex = 16;
             materialBox.Text = "material";
+            materialBox.Click += materialBox_Click;
             // 
             // rushBox
             // 

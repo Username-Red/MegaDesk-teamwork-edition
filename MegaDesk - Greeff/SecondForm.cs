@@ -150,10 +150,6 @@ namespace MegaDesk___Greeff
 
         }
 
-        private void drawerBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void drawerBox_Validating(object sender, CancelEventArgs e)
         {
@@ -172,7 +168,25 @@ namespace MegaDesk___Greeff
 
             }
 
-            
         }
+
+        private void materialBox_Click(object sender, EventArgs e)
+        {
+
+
+
+            List<string> materials = new List<string>();
+            materials.Add("Pine");
+            materials.Add("Vaneer");
+            materials.Add("Rosewood");
+            materials.Add("Laminate");
+            materials.Add("Oak");
+
+            materialBox.DataSource = materials;
+
+
+        }
+
+
     }
 }
