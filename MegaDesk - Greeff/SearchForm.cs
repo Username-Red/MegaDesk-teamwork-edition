@@ -32,10 +32,14 @@ namespace MegaDesk___Greeff
         }
 
 
-        private void searchButton_Click(object sender, EventArgs e)
+        private void searchButton_Click(object sender, EventArgs eArgs)
         {
-            string json = File.ReadAllText("deskQuote.txt");
-            var deskQuotes = JsonConvert.DeserializeObject<List<DeskQuote>>(json);
+            var deskQuotes = new List<DeskQuote>();
+            try {
+                string json = File.ReadAllText("deskQuote.txt");
+                deskQuotes = JsonConvert.DeserializeObject<List<DeskQuote>>(json);
+            }
+            catch (Exception e) { } // handling unexpected values ourselves
             if (deskQuotes == null)
                 deskQuotes = new List<DeskQuote>();
 

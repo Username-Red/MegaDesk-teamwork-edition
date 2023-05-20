@@ -93,13 +93,17 @@ namespace MegaDesk___Greeff
 
         }
 
-        private void loadButton_Click(object sender, EventArgs e)
+        private void loadButton_Click(object sender, EventArgs eArgs)
         {
-            string json = File.ReadAllText("deskQuote.txt");
-            var deskQuotes = JsonConvert.DeserializeObject<List<DeskQuote>>(json);
+            var deskQuotes = new List<DeskQuote>();
+            try {
+                string json = File.ReadAllText("deskQuote.txt");
+                deskQuotes = JsonConvert.DeserializeObject<List<DeskQuote>>(json);
+            }
+            catch (Exception e) { } // handling unexpected values ourselves
             if (deskQuotes == null)
                 deskQuotes = new List<DeskQuote>();
-            
+
             foreach (DeskQuote deskQuote in deskQuotes) {
                 infoBox.Text += "Customer Name: " + deskQuote._customerName +
                     "\n" + "Width: " + deskQuote._desk._width.ToString() + " in." +
@@ -110,6 +114,41 @@ namespace MegaDesk___Greeff
                     "\n" + "Total: " + String.Format("{0, 0:C2}", deskQuote.CalculateTotal()) +
                     "\n\n";
             }
+
+            DataTable table = new DataTable("Quotes");
+            /*
+            table.Columns.Add(new DataColumn("Name", typeof(string)));
+            DataRow row = table.NewRow();
+            row["Name"] = "Craig Bitner";
+            table.Rows.Add(row);
+            */
+
+            table.Columns.Add(new DataColumn("Name", typeof(string)));
+            table.Columns.Add(new DataColumn("Width", typeof(int)));
+            table.Columns.Add(new DataColumn("Depth", typeof(int)));
+            table.Columns.Add(new DataColumn("Drawers", typeof(int)));
+            table.Columns.Add(new DataColumn("Material", typeof(string)));
+            table.Columns.Add(new DataColumn("Rush Days", typeof(int)));
+            table.Columns.Add(new DataColumn("Total", typeof(double)));
+
+            foreach (DeskQuote deskQuote in deskQuotes) {
+                DataRow row = table.NewRow();
+                row["Name"] = deskQuote._customerName;
+                row["Width"] = deskQuote._desk._width;
+                row["Depth"] = deskQuote._desk._depth;
+                row["Drawers"] = deskQuote._desk._drawerCount;
+                row["Material"] = deskQuote._desk._material;
+                row["Rush Days"] = deskQuote._rushDays;
+                row["Total"] = deskQuote.CalculateTotal();
+                table.Rows.Add(row);
+            }
+
+            DataSet dataSet = new DataSet();
+            dataSet.Tables.Add(table);
+            BindingSource bindingSource = new BindingSource();
+            bindingSource.DataSource = table;
+            dataGridView1.DataSource = bindingSource;
+
             /*
             string file = "deskQuote.txt";
             string str = File.ReadAllText(file);

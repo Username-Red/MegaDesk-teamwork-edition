@@ -98,7 +98,7 @@ namespace MegaDesk___Greeff
             }
         }
 
-        private void submitButton_Click(object sender, EventArgs e)
+        private void submitButton_Click(object sender, EventArgs eArgs)
         {
             double width1 = Convert.ToDouble(widthBox.Text);
             double depth1 = Convert.ToDouble(depthBox.Text);
@@ -118,10 +118,14 @@ namespace MegaDesk___Greeff
             DeskQuote quote = new DeskQuote(desk, rushDays, name, date);
             double total = quote.CalculateTotal();
 
-            string json = File.ReadAllText("deskQuote.txt");
-            var deskQuotes = JsonConvert.DeserializeObject<List<DeskQuote>>(json);
+            var deskQuotes = new List<DeskQuote>();
+            try {
+                string json = File.ReadAllText("deskQuote.txt");
+                deskQuotes = JsonConvert.DeserializeObject<List<DeskQuote>>(json);
+            } catch (Exception e) {} // handling unexpected values ourselves
             if (deskQuotes == null)
                 deskQuotes = new List<DeskQuote>();
+
             deskQuotes.Add(quote);
             File.WriteAllText("deskQuote.txt", JsonConvert.SerializeObject(deskQuotes));
 

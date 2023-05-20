@@ -32,14 +32,17 @@
             this.loadButton = new System.Windows.Forms.Button();
             this.infoBox = new System.Windows.Forms.Label();
             this.searchButton = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button2.Location = new System.Drawing.Point(12, 336);
+            this.button2.Location = new System.Drawing.Point(14, 448);
+            this.button2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(121, 34);
+            this.button2.Size = new System.Drawing.Size(138, 45);
             this.button2.TabIndex = 3;
             this.button2.Text = "Back";
             this.button2.UseVisualStyleBackColor = true;
@@ -47,9 +50,10 @@
             // loadButton
             // 
             this.loadButton.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.loadButton.Location = new System.Drawing.Point(234, 336);
+            this.loadButton.Location = new System.Drawing.Point(267, 448);
+            this.loadButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.loadButton.Name = "loadButton";
-            this.loadButton.Size = new System.Drawing.Size(121, 34);
+            this.loadButton.Size = new System.Drawing.Size(138, 45);
             this.loadButton.TabIndex = 39;
             this.loadButton.Text = "Load";
             this.loadButton.UseVisualStyleBackColor = true;
@@ -58,33 +62,47 @@
             // 
             this.infoBox.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.infoBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.infoBox.Location = new System.Drawing.Point(190, 9);
+            this.infoBox.Location = new System.Drawing.Point(217, 12);
             this.infoBox.Name = "infoBox";
-            this.infoBox.Size = new System.Drawing.Size(222, 289);
+            this.infoBox.Size = new System.Drawing.Size(253, 385);
             this.infoBox.TabIndex = 40;
             // 
             // searchButton
             // 
             this.searchButton.Font = new System.Drawing.Font("Segoe UI", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.searchButton.Location = new System.Drawing.Point(486, 336);
+            this.searchButton.Location = new System.Drawing.Point(555, 448);
+            this.searchButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.searchButton.Name = "searchButton";
-            this.searchButton.Size = new System.Drawing.Size(121, 34);
+            this.searchButton.Size = new System.Drawing.Size(138, 45);
             this.searchButton.TabIndex = 41;
             this.searchButton.Text = "Search";
             this.searchButton.UseVisualStyleBackColor = true;
             this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.RowTemplate.Height = 29;
+            this.dataGridView1.Size = new System.Drawing.Size(708, 426);
+            this.dataGridView1.TabIndex = 42;
+            // 
             // ThirdForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(619, 382);
+            this.ClientSize = new System.Drawing.Size(707, 509);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.searchButton);
             this.Controls.Add(this.infoBox);
             this.Controls.Add(this.loadButton);
             this.Controls.Add(this.button2);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "ThirdForm";
             this.Text = "ThirdForm";
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -96,5 +114,6 @@
         private Button loadButton;
         private Label infoBox;
         private Button searchButton;
+        private DataGridView dataGridView1;
     }
 }

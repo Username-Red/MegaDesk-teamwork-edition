@@ -23,8 +23,20 @@ namespace MegaDesk___Greeff
         }
 
         // Methods
-        public int CalculateRushOrderCost()
-        {
+        public int CalculateRushOrderCost() {
+            string contents = Properties.Resources.cse325_document_rushOrderPrices;
+            string[] priceStrings = contents.Split('\n');
+            int[][] prices = new int[3][];
+
+            for (int group = 0; group < 3; group++) {
+                int[] priceGroup = { 0, 0, 0 };
+                prices[group] = priceGroup;
+
+                for (int i = 0; i < 3; i++) {
+                    int priceStringsIndex = group * 3 + i;
+                    prices[group][i] = Convert.ToInt32(priceStrings[priceStringsIndex]);
+                }
+            }
             int rushCost = 0;
 
             double area = _desk.CalculateDeskArea();
@@ -32,17 +44,17 @@ namespace MegaDesk___Greeff
             {
                 if (area <= 1000)
                 {
-                    rushCost = 30;
+                    rushCost = prices[2][0];
                 }
 
                 else if (area > 1000 && area < 2000)
                 {
-                    rushCost = 35;
+                    rushCost = prices[2][1];
                 }
 
                 else if (area > 2000) 
                 {
-                    rushCost = 40;
+                    rushCost = prices[2][2];
                 }
                 
             }
@@ -51,17 +63,17 @@ namespace MegaDesk___Greeff
             {
                 if (area <= 1000)
                 {
-                    rushCost = 40;
+                    rushCost = prices[1][0];
                 }
 
                 else if (area > 1000 && area < 2000)
                 {
-                    rushCost = 50;
+                    rushCost = prices[1][1];
                 }
 
                 else if (area > 2000)
                 {
-                    rushCost = 60;
+                    rushCost = prices[1][2];
                 }
             }
 
@@ -69,17 +81,17 @@ namespace MegaDesk___Greeff
             {
                 if (area <= 1000)
                 {
-                    rushCost = 60;
+                    rushCost = prices[0][0];
                 }
 
                 else if (area > 1000 && area < 2000)
                 {
-                    rushCost = 70;
+                    rushCost = prices[0][1];
                 }
 
                 else if (area > 2000)
                 {
-                    rushCost = 80;
+                    rushCost = prices[0][2];
                 }
             }
 
