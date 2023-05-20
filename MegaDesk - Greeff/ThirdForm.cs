@@ -21,6 +21,7 @@ namespace MegaDesk___Greeff
             InitializeComponent();
             loadButton.Click += new EventHandler(loadButton_Click);
             button2.Click += new EventHandler(button2_Click);
+            FormClosed += new FormClosedEventHandler(ThirdForm_FormClosed);
         }
 
         private void Button2_Click(object? sender, EventArgs e) {
@@ -166,6 +167,18 @@ namespace MegaDesk___Greeff
             searchForm.Tag = this;
             searchForm.Show(this);
             Hide();
+        }
+        private void ThirdForm_FormClosed(object sender, FormClosedEventArgs e) {
+            if (getFormsCount() == 0)
+                Application.Exit();
+        }
+        private int getFormsCount() {
+            int count = 0;
+            foreach (Form form in Application.OpenForms)
+                if (form.Visible)
+                    count++;
+
+            return count;
         }
     }
 }

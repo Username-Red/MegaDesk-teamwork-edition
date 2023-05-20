@@ -16,11 +16,8 @@ namespace MegaDesk___Greeff
         public SecondForm()
         {
             InitializeComponent();
+            FormClosed += new FormClosedEventHandler(SecondForm_FormClosed);
         }
-
-
-
-
         private void button2_Click(object sender, EventArgs e)
         {
             Form1 viewSecondForm = new Form1();
@@ -189,6 +186,18 @@ namespace MegaDesk___Greeff
             materialBox.DataSource = materials;
 
 
+        }
+        private void SecondForm_FormClosed(object sender, FormClosedEventArgs e) {
+            if (getFormsCount() == 0)
+                Application.Exit();
+        }
+        private int getFormsCount() {
+            int count = 0;
+            foreach (Form form in Application.OpenForms)
+                if (form.Visible)
+                    count++;
+
+            return count;
         }
 
 

@@ -7,6 +7,7 @@ namespace MegaDesk___Greeff
         public Form1()
         {
             InitializeComponent();
+            FormClosed += new FormClosedEventHandler(Form1_FormClosed);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -37,7 +38,18 @@ namespace MegaDesk___Greeff
         {
             Close();
         }
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e) {
+            if (getFormsCount() == 0)
+                Application.Exit();
+        }
+        private int getFormsCount() {
+            int count = 0;
+            foreach (Form form in Application.OpenForms)
+                if (form.Visible)
+                    count++;
 
-        
+            return count;
+        }
+
     }
 }

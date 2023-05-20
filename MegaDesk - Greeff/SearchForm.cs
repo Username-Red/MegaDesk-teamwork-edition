@@ -18,6 +18,7 @@ namespace MegaDesk___Greeff
             InitializeComponent();
             button2.Click += new EventHandler(button2_Click);
             searchButton.Click += new EventHandler(searchButton_Click);
+            FormClosed += new FormClosedEventHandler(SearchForm_FormClosed);
         }
 
 
@@ -74,6 +75,18 @@ namespace MegaDesk___Greeff
             materials.Add("Oak");
 
             materialBox.DataSource = materials;
+        }
+        private void SearchForm_FormClosed(object sender, FormClosedEventArgs e) {
+            if (getFormsCount() == 0)
+                Application.Exit();
+        }
+        private int getFormsCount() {
+            int count = 0;
+            foreach (Form form in Application.OpenForms)
+                if (form.Visible)
+                    count++;
+
+            return count;
         }
     }
 }
